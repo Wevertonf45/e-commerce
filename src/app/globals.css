@@ -1,9 +1,11 @@
-@import "tailwindcss";
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
 
-@theme {
-    --color-prim: #FBFAF9;
-    --color-sec: #E6DACB;
-
-    --color-letter1: #1C1A17;
-    --color-letter2: #4C4946;
+:root{
+    --prim: #FBFAF9;
+    --sec: #E6DACB;
 }
