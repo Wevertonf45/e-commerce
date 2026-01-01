@@ -1,18 +1,29 @@
 //Imports
 import fastify from 'fastify';
 import dotenv from 'dotenv';
+import { MySQLClient } from './database/database.js';
+import { routes } from './routes.js';
 
 
 const main = async () => {
-    //Configurações
-    dotenv.config();
-    
-    //Variáveis
-    const app = fastify({ logger: true });
-    const PORT = Number(process.env.PORT);
+    try {
+        //Configurações
+        dotenv.config();
 
-    //Middlewares
-    app.listen({ port: PORT });
+        //Conexão com o banco de dados
+        await MySQLClient.connect();
+
+        //Variáveis
+        const app = fastify({ logger: true });
+        const PORT = Number(process.env.PORT);
+
+        //Middlewares
+        app.listen({ port: PORT }, () => console.log(`Server running on port ${PORT}`));
+        app.register(routes);
+
+    } catch (error) {
+        console.error('Error starting server:', error);
+    }
 }
 
 main();
